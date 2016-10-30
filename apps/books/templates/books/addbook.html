@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add A book</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'books/css/add_style.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+    <div id=header_container>
+      <div id = "header">
+        <a class="header_content" href="{% url 'books-index' %}">Home</a>
+        <a class="header_content" href="{% url 'logout' %}">Logout</a>
+      </div>
+      {% if messages %}
+        <div class="{{messages.0.tags}}">
+          <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+    <div id="bookform" class= "page_forms">
+      <h3>Add a New Book Title and a Review:</h3>
+      <form action="{% url 'books-add' %}" method="post">
+          {% csrf_token %}
+          <p><label for="title">Book Title:</label><label><input type="text" name="title"></label></p>
+          <p><label>Author:</label><label for="old_author"><span>Choose from the List:</span><select name="old_author">
+            {% if authors %}
+              {% for author in authors %}
+                <option value="{{author}}">{{author.author}}</option>
+              {% endfor %}
+            {% else %}
+              <option value=""></option>
+            {% endif %}
+          </select></label></p>
+          <p><label></label><label for="newauthor"><span>Add New Author: </span><input type="text" name="new_author"></label></p>
+          <p><label for="review">Review:</label><label><textarea name="review" rows="8" cols="40"></textarea></label></p>
+          <p><label for="rating">Rating:</label><label><select name="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label></p>
+          <p><label></label><label><input type="submit" value="Add Book and Review"></label></p>
+      </form>
+    </div>
+  </body>
+</html>

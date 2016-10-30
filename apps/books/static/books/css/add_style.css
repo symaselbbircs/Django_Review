@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.error {
+  color: red;
+}
+.success{
+  color: green;
+}
+.messages{
+  margin-left: 400px;
+}
+
+#bookform{
+  margin-top: 100px;
+  margin-left: 350px;
+  }
+  #bookform h3{
+    margin-left: 20px;
+  }
+
+#header_container{
+  display: inline-block;
+  width: 1300px;
+  background-color: white;
+}
+
+.header_content{
+  display: inline-block;
+}
+
+#header a:first-of-type{
+  margin-top: 10px;
+  margin-left: 900px;
+  margin-right: 10px;
+}
+
+.filler{
+  width: 40%;
+  border: 1px solid black;
+}
+
+.page_forms{
+  padding: 10px;
+  }
+  .page_forms span{
+    text-align: left;
+    font-style: italic;
+  }
+  .page_forms form{
+    padding: 2px;
+    display:table;
+  }
+  .page_forms label{
+    padding: 10px;
+    display: table-cell;
+    text-align:right;
+    vertical-align: top;
+  }
+  .page_forms input{
+    margin-bottom: 2px;
+  }
+  .page_forms p{
+    display: table-row;
+  }

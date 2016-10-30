@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{data.0.book.title}}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'books/css/books_style.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+    <div id=header_container>
+      <div id = "header">
+        <a class="header_content" href="{% url 'books-index' %}">Home</a>
+        <a class="header_content" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+    {% if data %}
+      <h5>{{data.0.book.title}}</h5>
+      <p>Author: {{data.0.book.author}}</p><br>
+      <div id="main">
+        <div class="main_content" id="reviews">
+          <h4>Reviews:</h4><hr><br>
+          <div class="topbooks">
+            {% for row in data %}
+            <p>Rating: {{row.rating}}/5</p>
+            <p><a href="{% url 'books-users' userid=row.user.id %}">{{row.user.first_name}}</a> says: <span>{{row.review}}</span></p>
+            <p><span id="MAKETHISITATLICS">Posted on {{row.updated_at}}</span></p><hr><br>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div id="main">
+          <h5>Failed to load review information</h5>
+        </div>
+      {% endif %}
+      <div class="main_content" id="otherbooks">
+        <form action="{% url 'books-addreview' bookid=data.0.book.id %}" method="post">
+          {% csrf_token %}
+          <p>Add a Review:</p>
+          <textarea name="review" rows="8" cols="40"></textarea>
+          <p>Rating: <select name="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></p>
+          <input type="hidden" name="userid" value="{{request.session.uid}}">
+          <input type="submit" value="Submit Review">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
